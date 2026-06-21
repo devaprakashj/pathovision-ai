@@ -1,0 +1,16 @@
+# Environment files — never commit secrets
+backend/.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pth
+model/cell_classification-1/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Misc
+.DS_Store
+*.log
