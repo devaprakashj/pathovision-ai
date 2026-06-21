@@ -10,6 +10,7 @@ import RoadmapSection from './components/RoadmapSection'
 import PresentationMode from './components/PresentationMode'
 import Disclaimer from './components/Disclaimer'
 import LandingPage from './components/LandingPage'
+import ExplainerPage from './components/ExplainerPage'
 import axios from 'axios'
 
 export default function App() {
@@ -18,7 +19,8 @@ export default function App() {
   const [error, setError]             = useState(null)
   const [history, setHistory]         = useState([])
   const [presentMode, setPresentMode] = useState(false)
-  const [showLanding, setShowLanding] = useState(true)  // start on landing page
+  const [showLanding, setShowLanding] = useState(true)
+  const [showExplainer, setShowExplainer] = useState(false)
 
   async function handleAnalyze(file) {
     setLoading(true)
@@ -43,6 +45,10 @@ export default function App() {
     return <PresentationMode onExit={() => setPresentMode(false)} result={result} onAnalyze={handleAnalyze} loading={loading} />
   }
 
+  if (showExplainer) {
+    return <ExplainerPage onClose={() => setShowExplainer(false)} />
+  }
+
   // Show landing page first
   if (showLanding) {
     return <LandingPage onEnter={() => setShowLanding(false)} />
@@ -50,7 +56,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Navbar onPresent={() => setPresentMode(true)} />
+      <Navbar onPresent={() => setPresentMode(true)} onExplain={() => setShowExplainer(true)} />
 
       <main className="max-w-7xl mx-auto px-4 py-8 space-y-8">
         {/* Dashboard stats */}
